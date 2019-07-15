@@ -14,7 +14,7 @@ namespace Translate
     {
         string baseUlr = "https://translated-mymemory---translation-memory.p.rapidapi.com/api/get";
 
-        public async Task<RootObject> Trasnlate(string from, string to, string text)
+        public async Task<RootObject> TrasnlateAsync(string from, string to, string text)
         {
             using (HttpClient client = new HttpClient())
             {

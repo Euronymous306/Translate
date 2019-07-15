@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using Translate;
+
 
 namespace WindowsFormsApp10
 {
@@ -19,14 +21,47 @@ namespace WindowsFormsApp10
             InitializeComponent();
         }
 
-        private void ButtonSend_Click(object sender, EventArgs e)
+        private async void ButtonSend_Click(object sender, EventArgs e)
         {
-            if (ComboBoxFrom.SelectedIndex == 2 && InputTextBox.Text == "გამარჯობა")
+            TranslationService translation = new TranslationService();
+
+            if (ComboBoxFrom.SelectedIndex == 0 && ComboBoxTo.SelectedIndex == 1)
             {
-                TextBoxResult.Text = "Hello";
+                var result = await translation.TrasnlateAsync("en", "ru", InputTextBox.Text);
+                TextBoxResult.Text = result.responseData.translatedText;
+            }
+
+            else if (ComboBoxFrom.SelectedIndex == 0 && ComboBoxTo.SelectedIndex == 2)
+            {
+                var result = await translation.TrasnlateAsync("en", "geo", InputTextBox.Text);
+                TextBoxResult.Text = result.responseData.translatedText;
+            }
+
+            else if (ComboBoxFrom.SelectedIndex == 1 && ComboBoxTo.SelectedIndex == 0)
+            {
+                var result = await translation.TrasnlateAsync("ru", "en", InputTextBox.Text);
+                TextBoxResult.Text = result.responseData.translatedText;
+            }
+
+            else if (ComboBoxFrom.SelectedIndex == 1 && ComboBoxTo.SelectedIndex == 2)
+            {
+                var result = await translation.TrasnlateAsync("ru", "geo", InputTextBox.Text);
+                TextBoxResult.Text = result.responseData.translatedText;
+            }
+
+            else if (ComboBoxFrom.SelectedIndex == 2 && ComboBoxTo.SelectedIndex == 0)
+            {
+                var result = await translation.TrasnlateAsync("geo", "en", InputTextBox.Text);
+                TextBoxResult.Text = result.responseData.translatedText;
+            }
+
+            else if (ComboBoxFrom.SelectedIndex == 2 && ComboBoxTo.SelectedIndex == 1)
+            {
+                var result = await translation.TrasnlateAsync("geo", "ru", InputTextBox.Text);
+                TextBoxResult.Text = result.responseData.translatedText;
             }
             else
-            TextBoxResult.Text = InputTextBox.Text;
+                TextBoxResult.Text = InputTextBox.Text;
         }
 
         private void Translate_Load(object sender, EventArgs e)
@@ -46,6 +81,7 @@ namespace WindowsFormsApp10
         private void Translate_Click(object sender, EventArgs e)
         {
             InputTextBox.DeselectAll();
+            InputTextBox.Cursor
         }
 
         private void undoToolStripMenuItem_Click(object sender, EventArgs e)
