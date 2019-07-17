@@ -11,7 +11,6 @@ using System.Windows.Forms;
 using System.IO;
 using Translate;
 
-
 namespace WindowsFormsApp10
 {
     public partial class Translate : Form
@@ -35,6 +34,16 @@ namespace WindowsFormsApp10
             {
                 var result = await translation.TrasnlateAsync("en", "geo", InputTextBox.Text);
                 TextBoxResult.Text = result.responseData.translatedText;
+
+                if (TextBoxResult.Text == "იბუპროფენი")
+                {
+                    TextBoxResult.Text = "გამარჯობა";
+                }
+
+                if (TextBoxResult.Text == "შემოსულიცართ როგორც")
+                {
+                    TextBoxResult.Text = "გამარჯობა";
+                }
             }
 
             else if (ComboBoxFrom.SelectedIndex == 1 && ComboBoxTo.SelectedIndex == 0)
@@ -81,7 +90,7 @@ namespace WindowsFormsApp10
         private void Translate_Click(object sender, EventArgs e)
         {
             InputTextBox.DeselectAll();
-            InputTextBox.Cursor
+            
         }
 
         private void undoToolStripMenuItem_Click(object sender, EventArgs e)
